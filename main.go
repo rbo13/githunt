@@ -11,6 +11,7 @@ import (
 	"time"
 
 	flag "github.com/ogier/pflag"
+	"github.com/olekukonko/tablewriter"
 )
 
 // flags ...
@@ -75,8 +76,8 @@ func main() {
 			log.Printf("ERROR DUE TO: %s", err.Error())
 			return
 		}
-		log.Println(result)
 		// TODO:: print `result` in tabular form
+		printTabularData(result)
 	}
 }
 
@@ -89,6 +90,23 @@ func printUsage() {
 	fmt.Println("Options:")
 	flag.PrintDefaults()
 	os.Exit(1)
+}
+
+func printTabularData(result *User) {
+	data := [][]string{
+		[]string{"Username", result.Login, "500"},
+		[]string{"Name", result.Name, "288"},
+		[]string{"Repo", result.HTMLURL, "120"},
+		[]string{"Bio", result.Bio, "800"},
+	}
+
+	table := tablewriter.NewWriter(os.Stdout)
+	table.SetHeader([]string{"Name", "Sign", "Rating"})
+
+	for _, v := range data {
+		table.Append(v)
+	}
+	table.Render() // Send output
 }
 
 func getUserByUsername(username string) (*User, error) {
