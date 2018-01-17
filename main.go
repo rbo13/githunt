@@ -76,7 +76,7 @@ func main() {
 			return
 		}
 		log.Println(result)
-		// TODO:: print `result`
+		// TODO:: print `result` in tabular form
 	}
 }
 
