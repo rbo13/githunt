@@ -68,17 +68,7 @@ func main() {
 
 	users := strings.Split(user, ",")
 	fmt.Printf("Searching user(s): %s\n", users)
-
-	for _, u := range users {
-		log.Print(u)
-		result, err := getUserByUsername(u)
-		if err != nil {
-			log.Printf("ERROR DUE TO: %s", err.Error())
-			return
-		}
-		// TODO:: print `result` in tabular form
-		printTabularData(result)
-	}
+	printTabularData(users)
 }
 
 func init() {
@@ -92,20 +82,26 @@ func printUsage() {
 	os.Exit(1)
 }
 
-func printTabularData(result *User) {
-	data := [][]string{
-		[]string{"Username", result.Login, "500"},
-		[]string{"Name", result.Name, "288"},
-		[]string{"Repo", result.HTMLURL, "120"},
-		[]string{"Bio", result.Bio, "800"},
-	}
-
+func printTabularData(users []string) {
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"Name", "Sign", "Rating"})
+	table.SetHeader([]string{"Username", "Name", "Bio"})
 
-	for _, v := range data {
-		table.Append(v)
+	for _, u := range users {
+		result, err := getUserByUsername(u)
+		if err != nil {
+			log.Printf("ERROR DUE TO: %s", err.Error())
+			return
+		}
+
+		data := [][]string{
+			[]string{result.Login, result.Name, result.Bio},
+		}
+		// TODO:: print `result` in tabular form
+		for _, v := range data {
+			table.Append(v)
+		}
 	}
+
 	table.Render() // Send output
 }
 
