@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 
@@ -84,17 +85,22 @@ func printUsage() {
 
 func printTabularData(users []string) {
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"Username", "Name", "Bio"})
+	table.SetHeader([]string{"User ID", "Username", "Name", "Bio", "Followers", "Following"})
 
 	for _, u := range users {
 		result, err := getUserByUsername(u)
+		// Convert string to int.
+		IDstr := strconv.Itoa(result.ID)
+		followingStr := strconv.Itoa(result.Following)
+		followerStr := strconv.Itoa(result.Followers)
+
 		if err != nil {
 			log.Printf("ERROR DUE TO: %s", err.Error())
 			return
 		}
 
 		data := [][]string{
-			[]string{result.Login, result.Name, result.Bio},
+			[]string{IDstr, result.Login, result.Name, result.Bio, followerStr, followingStr},
 		}
 		// TODO:: print `result` in tabular form
 		for _, v := range data {
