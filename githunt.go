@@ -88,7 +88,7 @@ func printTabularData(users []string) {
 	table.SetHeader([]string{"User ID", "Username", "Name", "Bio", "Followers", "Following"})
 
 	for _, u := range users {
-		result, err := getUserByUsername(u)
+		result, err := GetUserByUsername(u)
 		// Convert string to int.
 		IDstr := strconv.Itoa(result.ID)
 		followingStr := strconv.Itoa(result.Following)
@@ -102,16 +102,15 @@ func printTabularData(users []string) {
 		data := [][]string{
 			[]string{IDstr, result.Login, result.Name, result.Bio, followerStr, followingStr},
 		}
-		// TODO:: print `result` in tabular form
 		for _, v := range data {
 			table.Append(v)
 		}
 	}
 
-	table.Render() // Send output
+	table.Render()
 }
 
-func getUserByUsername(username string) (*User, error) {
+func GetUserByUsername(username string) (*User, error) {
 	res, err := http.Get(apiURL + userEndpoint + username)
 	var user User
 
