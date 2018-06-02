@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestItShouldReturnUser(t *testing.T) {
+func TestGetUserByUsername(t *testing.T) {
 
 	user, err := GetUserByUsername("whaangbuu")
 
@@ -18,6 +18,4 @@ func TestItShouldReturnUser(t *testing.T) {
 	if expectedLoginName != gotLoginName {
 		t.Errorf("Expects: %s, but got %s", expectedLoginName, gotLoginName)
 	}
-
-	t.Log(user)
 }
