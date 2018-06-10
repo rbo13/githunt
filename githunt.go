@@ -13,6 +13,7 @@ import (
 
 	flag "github.com/ogier/pflag"
 	"github.com/olekukonko/tablewriter"
+	"github.com/whaangbuu/go-loading/loading"
 )
 
 // flags ...
@@ -69,6 +70,7 @@ func main() {
 
 	users := strings.Split(user, ",")
 	fmt.Printf("Searching user(s): %s\n", users)
+	loading.StartNew("Fetching")
 	printTabularData(users)
 }
 
@@ -106,7 +108,7 @@ func printTabularData(users []string) {
 			table.Append(v)
 		}
 	}
-
+	fmt.Println()
 	table.Render()
 }
 
