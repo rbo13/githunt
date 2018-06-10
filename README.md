@@ -21,8 +21,8 @@ Githunt is using some helpful libraries. Instructions on how to use them in your
 
 | Plugin | README |
 | ------ | ------ |
-| pflag | [https://github.com/ogier/pflag/blob/master/README.md] |
-| tablewriter | [https://github.com/olekukonko/tablewriter/blob/master/README.md] |
+| pflag | https://github.com/ogier/pflag/blob/master/README.md] 
+| tablewriter | https://github.com/olekukonko/tablewriter/blob/master/README.md] 
 
 #### How to run?
 
