@@ -4,6 +4,9 @@
 Githunt is a simple CLI tool for searching github users. Written in Golang.
 
 
+![CircleCI](https://img.shields.io/circleci/project/github/RedSparr0w/node-csgo-parser.svg)
+
+
 
 
 ### Installation
